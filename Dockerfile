@@ -31,6 +31,13 @@ RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge
     php5-memcached \
     memcached
 
+# Install NPM & NPM modules (gulp, bower)
+RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge/testing add \
+    nodejs
+RUN npm install --silent -g \
+    gulp \
+    bower
+
 # Install composer
 ENV COMPOSER_HOME=/composer
 RUN mkdir /composer \

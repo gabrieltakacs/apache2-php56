@@ -27,6 +27,7 @@ RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge
     php5-dom \
     php5-apache2 \
     php5-bcmath \
+    php5-posix \
     php5-memcache \
     php5-memcached \
     memcached

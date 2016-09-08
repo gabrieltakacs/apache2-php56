@@ -79,7 +79,9 @@ RUN adduser -D dev \
         && echo 'root:rootpassword' | chpasswd \
         && echo 'dev:devpassword' | chpasswd
 
+RUN chmod a+rw /var/log/apache2
+
 EXPOSE 80 443
-USER dev
 CMD ["/run.sh"]
+USER dev
 WORKDIR /var/www/web

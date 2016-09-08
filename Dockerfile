@@ -75,6 +75,11 @@ COPY apache2/httpd.conf /etc/apache2/httpd.conf
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
 
-EXPOSE 80 443
+RUN adduser -D dev \
+        && echo 'root:rootpassword' | chpasswd \
+        && echo 'dev:devpassword' | chpasswd
 
+EXPOSE 80 443
+USER dev
 CMD ["/run.sh"]
+WORKDIR /var/www/web

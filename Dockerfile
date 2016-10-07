@@ -30,7 +30,9 @@ RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge
     php5-posix \
     php5-memcache \
     php5-memcached \
-    memcached
+    php5-imagick \
+    memcached \
+    imagemagick
 
 # Install NPM & NPM modules (gulp, bower)
 RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge/testing add \

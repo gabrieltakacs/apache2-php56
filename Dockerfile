@@ -1,7 +1,7 @@
 FROM gabrieltakacs/alpine:latest
 MAINTAINER Gabriel Takács <gtakacs@gtakacs.sk>
 
-# Add run file
+# Copy and add files first (to make dockerhub autobuild working: https://forums.docker.com/t/automated-docker-build-fails/22831/14)
 COPY run.sh /run.sh
 
 # Install nginx

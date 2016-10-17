@@ -80,6 +80,6 @@ RUN chmod a+x /run.sh
 
 RUN chmod a+rw /var/log/apache2
 
-EXPOSE 80 443
+EXPOSE 80 443 25
 CMD ["/run.sh"]
 WORKDIR /var/www/web

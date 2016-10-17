@@ -1,6 +1,9 @@
 FROM gabrieltakacs/alpine:latest
 MAINTAINER Gabriel Takács <gtakacs@gtakacs.sk>
 
+# Add run file
+COPY run.sh /run.sh
+
 # Install nginx
 RUN apk add apache2 supervisor
 
@@ -73,8 +76,7 @@ RUN chown -R www-data:www-data /run/apache2/
 # Copy Apache2 config
 COPY apache2/httpd.conf /etc/apache2/httpd.conf
 
-# Add run file
-COPY run.sh /run.sh
+# Make run file executable
 RUN chmod a+x /run.sh
 
 RUN chmod a+rw /var/log/apache2

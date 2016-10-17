@@ -4,11 +4,10 @@ MAINTAINER Gabriel Takács <gtakacs@gtakacs.sk>
 # Copy and add files first (to make dockerhub autobuild working: https://forums.docker.com/t/automated-docker-build-fails/22831/14)
 COPY run.sh /run.sh
 
-# Install nginx
-RUN apk add apache2 supervisor
-
-# Install PHP 5.6
+# Install Apache2, supervisor, PHP 5.6
 RUN apk --no-cache --update add \
+    apache2 \
+    supervisor \
     php5 \
     php5-xml \
     php5-pgsql \
@@ -38,7 +37,7 @@ RUN apk --no-cache --update add \
     imagemagick
 
 # Install NPM & NPM modules (gulp, bower)
-RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge/testing add \
+RUN apk --no-cache --update add \
     nodejs
 RUN npm install --silent -g \
     gulp \

@@ -5,7 +5,7 @@ MAINTAINER Gabriel Takács <gtakacs@gtakacs.sk>
 RUN apk add apache2 supervisor
 
 # Install PHP 5.6
-RUN apk --no-cache --update --repository=http://dl-4.alpinelinux.org/alpine/edge/testing add \
+RUN apk --no-cache --update add \
     php5 \
     php5-xml \
     php5-pgsql \
@@ -76,10 +76,6 @@ COPY apache2/httpd.conf /etc/apache2/httpd.conf
 # Add run file
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
-
-RUN adduser -D dev \
-        && echo 'root:rootpassword' | chpasswd \
-        && echo 'dev:devpassword' | chpasswd
 
 RUN chmod a+rw /var/log/apache2
 

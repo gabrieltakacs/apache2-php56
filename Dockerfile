@@ -42,6 +42,7 @@ RUN apk --no-cache --update add \
 RUN apk --no-cache --update add \
     nodejs
 RUN npm install --silent -g \
+    npm \
     gulp \
     bower
 

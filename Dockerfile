@@ -41,8 +41,7 @@ RUN apk --no-cache --update add \
 # Install NPM & NPM modules (gulp, bower)
 RUN apk --no-cache --update add \
     nodejs
-RUN npm install --silent -g \
-    npm \
+RUN npm install  -g \
     gulp \
     bower
 

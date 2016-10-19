@@ -11,6 +11,7 @@ RUN apk --no-cache --update add \
     php5 \
     php5-xml \
     php5-pgsql \
+    php5-mysql \
     php5-mysqli \
     php5-pdo_mysql \
     php5-mcrypt \

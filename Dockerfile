@@ -35,7 +35,8 @@ RUN apk --no-cache --update add \
     php5-memcached \
     php5-imagick \
     memcached \
-    imagemagick
+    imagemagick \
+    postfix
 
 # Install NPM & NPM modules (gulp, bower)
 RUN apk --no-cache --update add \

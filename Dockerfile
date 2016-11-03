@@ -45,15 +45,17 @@ RUN npm install  -g \
     gulp \
     bower
 
+# php5-fpm configuration
+COPY php5/php.ini /etc/php5/php.ini
+
 # Install composer
 ENV COMPOSER_HOME=/composer
 RUN mkdir /composer \
-    && curl -sS https://getcomposer.org/installer | php \
-    && mkdir -p /opt/composer \
-    && mv composer.phar /usr/local/bin/composer
+    && curl -sS https://getcomposer.org/download/1.2.1/composer.phar > composer.phar
 
-# php5-fpm configuration
-COPY php5/php.ini /etc/php5/php.ini
+RUN mkdir -p /opt/composer \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod 777 /usr/local/bin/composer
 
 # Configure xdebug
 #RUN echo 'zend_extension="/usr/lib/php7/modules/xdebug.so"' >> /etc/php7/php.ini \
@@ -63,7 +65,7 @@ COPY php5/php.ini /etc/php5/php.ini
 #    && echo "xdebug.remote_port=9001" >> /etc/php7/php.ini \
 #    && echo "xdebug.remote_handler=dbgp" >> /etc/php7/php.ini \
 #    && echo "xdebug.remote_host=192.168.65.1" >> /etc/php7/php.ini
-    # (Only for MAC users) Fill IP address from:
+#     (Only for MAC users) Fill IP address from:
     # cat /Users/gtakacs/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/slirp/host
     # Source topic on Docker forums: https://forums.docker.com/t/ip-address-for-xdebug/10460/22
 
@@ -81,6 +83,9 @@ COPY apache2/httpd.conf /etc/apache2/httpd.conf
 RUN chmod a+x /run.sh
 
 RUN chmod a+rw /var/log/apache2
+
+#RUN apk --no-cache --update add icu icu-libs icu-dev
+#RUN docker-php-ext-install intl
 
 EXPOSE 80 443 25
 CMD ["/run.sh"]

@@ -1,4 +1,4 @@
-FROM gabrieltakacs/debian-jessie:1.0.0
+FROM gabrieltakacs/debian-jessie:1.0.1
 MAINTAINER Gabriel Takács <gtakacs@gtakacs.sk>
 
 # Copy and add files first (to make dockerhub autobuild working: https://forums.docker.com/t/automated-docker-build-fails/22831/14)
@@ -61,7 +61,8 @@ RUN adduser --shell /sbin/nologin --disabled-login www-data www-data
 RUN chown -R www-data:www-data /run/apache2/
 
 # Copy Apache2 config
-COPY apache2/httpd.conf /etc/apache2/httpd.conf
+COPY apache2/web.conf /etc/apache2/sites-available/web.conf
+RUN a2ensite web.conf
 
 # Make run file executable
 RUN chmod a+x /run.sh

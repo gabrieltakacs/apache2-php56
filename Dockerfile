@@ -1,36 +1,22 @@
-FROM gabrieltakacs/alpine:latest
+FROM gabrieltakacs/debian-jessie:1.0.0
 MAINTAINER Gabriel Takács <gtakacs@gtakacs.sk>
 
 # Copy and add files first (to make dockerhub autobuild working: https://forums.docker.com/t/automated-docker-build-fails/22831/14)
 COPY run.sh /run.sh
 
 # Install Apache2, supervisor, PHP 5.6
-RUN apk --no-cache --update add \
+RUN apt-get update && \
+    apt-get -y install \
     apache2 \
     supervisor \
     php5 \
-    php5-xml \
     php5-pgsql \
     php5-mysql \
-    php5-mysqli \
-    php5-pdo_mysql \
     php5-mcrypt \
-    php5-opcache \
     php5-gd \
     php5-curl \
     php5-json \
-    php5-phar \
-    php5-openssl \
-    php5-ctype \
-    php5-zip \
     php5-dev \
-    php5-iconv \
-    php5-soap \
-    php5-zlib \
-    php5-dom \
-    php5-apache2 \
-    php5-bcmath \
-    php5-posix \
     php5-memcache \
     php5-memcached \
     php5-imagick \
@@ -39,9 +25,8 @@ RUN apk --no-cache --update add \
     postfix
 
 # Install NPM & NPM modules (gulp, bower)
-RUN apk --no-cache --update add \
-    nodejs
-RUN npm install  -g \
+RUN apt-get -y install nodejs npm
+RUN npm install -g \
     gulp \
     bower
 
@@ -72,8 +57,7 @@ RUN mkdir -p /opt/composer \
 # Copy Supervisor config file
 COPY supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN adduser -s /sbin/nologin -D -G www-data www-data
-RUN mkdir /run/apache2
+RUN adduser --shell /sbin/nologin --disabled-login www-data www-data
 RUN chown -R www-data:www-data /run/apache2/
 
 # Copy Apache2 config

@@ -61,8 +61,10 @@ RUN adduser --shell /sbin/nologin --disabled-login www-data www-data
 RUN chown -R www-data:www-data /run/apache2/
 
 # Copy Apache2 config
-COPY apache2/web.conf /etc/apache2/sites-available/web.conf
-RUN a2ensite web.conf
+RUN rm /etc/apache2/sites-available/000-default.conf
+RUN rm /etc/apache2/sites-enabled/000-default.conf
+COPY apache2/web.conf /etc/apache2/sites-available/000-default.conf
+RUN a2ensite 000-default
 
 # Make run file executable
 RUN chmod a+x /run.sh

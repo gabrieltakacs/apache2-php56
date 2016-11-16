@@ -25,7 +25,7 @@ RUN apt-get update && \
     postfix
 
 # Install NPM & NPM modules (gulp, bower)
-RUN apt-get -y install nodejs npm
+RUN apt-get -y install nodejs-legacy nodejs npm
 RUN npm install -g \
     gulp \
     bower

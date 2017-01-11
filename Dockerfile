@@ -31,7 +31,7 @@ RUN npm install -g \
     bower
 
 # php5-fpm configuration
-COPY php5/php.ini /etc/php5/php.ini
+COPY ./php5/php.ini /etc/php5/apache2/php.ini
 
 # Install composer
 ENV COMPOSER_HOME=/composer
